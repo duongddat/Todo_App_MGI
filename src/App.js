@@ -3,20 +3,42 @@ import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import FilterControls from "./components/FilterControls";
 import Stats from "./components/Stats";
+import ThemeToggle from "./components/ThemeToggle";
+import "./App.css";
 
 const getLocalStorageTodos = () => {
   const todos = localStorage.getItem("todos");
   return todos ? JSON.parse(todos) : [];
 };
 
+const getLocalStorageTheme = () => {
+  const theme = localStorage.getItem("theme");
+  return theme ? theme : "light";
+};
+
 function App() {
   const [todos, setTodos] = useState(getLocalStorageTodos);
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
+  const [theme, setTheme] = useState(getLocalStorageTheme);
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
 
   const addTodo = (title) => {
     if (title.trim() === "") return;
@@ -46,18 +68,17 @@ function App() {
     );
 
   return (
-    <div className="min-h-screen flex flex-col items-center pt-8 bg-gradient-to-br from-blue-50 to-indigo-100 text-gray-800 text-[15px]">
+    <div className="todo-app">
       <div className="w-full max-w-2xl">
-        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 backdrop-blur-lg bg-opacity-95 dark:bg-opacity-90 transition-all duration-300 hover:shadow-purple-500/20 hover:shadow-3xl">
+        <div className="todo-card">
           {/* Header with Theme Toggle */}
-          <div className="flex justify-between items-center mb-8">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
+          <div className="todo-header">
+            <div className="todo-header-left">
+              <div className="todo-logo">
                 <span className="text-2xl">✨</span>
               </div>
-              <h1 className="text-4xl font-black bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
-                Todo App
-              </h1>
+              <h1 className="todo-title">Todo App</h1>
+              <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
             </div>
           </div>
 

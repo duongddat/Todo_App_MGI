@@ -3,25 +3,31 @@
 @tailwind utilities;
 
 :root {
-  --background: #f4f4f4;
-  --text-primary: #333;
-  --card-bg: #fff;
-  --button-bg: #5c67f2;
-  --button-text: #fff;
-  --input-bg: #fff;
-  --input-border: #ddd;
-  --delete-bg: #e74c3c;
+  --background: #faf5ff;
+  --text-primary: #1f2937;
+  --card-bg: #ffffff;
+  --button-bg: #8b5cf6;
+  --button-text: #ffffff;
+  --input-bg: #ffffff;
+  --input-border: #e5e7eb;
+  --delete-bg: #ef4444;
 }
 
-[data-theme="dark"] {
-  --background: #282c34;
-  --text-primary: #fff;
-  --card-bg: #444;
-  --button-bg: #61dafb;
-  --button-text: #282c34;
-  --input-bg: #555;
-  --input-border: #666;
-  --delete-bg: #c0392b;
+.dark {
+  --background: #111827;
+  --text-primary: #f9fafb;
+  --card-bg: #1f2937;
+  --button-bg: #a78bfa;
+  --button-text: #111827;
+  --input-bg: #374151;
+  --input-border: #4b5563;
+  --delete-bg: #dc2626;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -31,12 +37,74 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--background);
-  color: var(--text-primary);
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* Custom Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #8b5cf6, #ec4899);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #7c3aed, #db2777);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #9f7aea, #f472b6);
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #8b5cf6, #ec4899);
 }
