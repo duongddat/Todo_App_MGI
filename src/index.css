@@ -1,13 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f4f4f4;
+  --text-primary: #333;
+  --card-bg: #fff;
+  --button-bg: #5c67f2;
+  --button-text: #fff;
+  --input-bg: #fff;
+  --input-border: #ddd;
+  --delete-bg: #e74c3c;
+}
+
+[data-theme="dark"] {
+  --background: #282c34;
+  --text-primary: #fff;
+  --card-bg: #444;
+  --button-bg: #61dafb;
+  --button-text: #282c34;
+  --input-bg: #555;
+  --input-border: #666;
+  --delete-bg: #c0392b;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
