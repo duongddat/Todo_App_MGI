@@ -1,70 +1,138 @@
-# Getting Started with Create React App
+# Todo App với React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Ứng dụng quản lý công việc đẹp mắt, đầy đủ chức năng: thêm/sửa/xóa, lọc, tìm kiếm, thống kê, dark mode, animation và lưu dữ liệu vào localStorage.
 
-## Available Scripts
+## ✨ Tính năng
 
-In the project directory, you can run:
+✅ Thêm công việc - với validation không cho phép rỗng
 
-### `npm start`
+✅ Đánh dấu hoàn thành - tích hợp checkbox và click vào text
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+✅ Xóa công việc - với animation mượt mà
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+✅ Lọc công việc - Tất cả / Đang làm / Hoàn thành
 
-### `npm test`
+🔍 Tìm kiếm - theo từ khóa (không phân biệt hoa thường)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+📊 Thống kê - Tổng số, đã xong, chưa xong, tỷ lệ % + progress bar
 
-### `npm run build`
+🌙 Dark/Light Mode - lưu cài đặt vào localStorage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+💾 Lưu trữ tự động - dữ liệu được lưu vào localStorage
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+📱 Responsive - giao diện đẹp trên mọi thiết bị
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+🎬 Animation - hiệu ứng mượt mà với Tailwind CSS
 
-### `npm run eject`
+## 🤖 AI Usage
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Tôi đã dùng AI một cách thông minh để giải quyết các vấn đề khó và tăng tốc độ phát triển.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 1. Các prompt AI tôi đã dùng khi gặp khó khăn
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- "React: cách triển khai theme light/dark trong tailwind, đồng thời thêm/remove class 'dark' trên documentElement bằng useEffect"
+- "Cách làm progress bar hiển thị tỷ lệ hoàn thành todo trong React + Tailwind CSS, có background và fill mượt"
+- "React: làm animation xóa todo item bằng state + setTimeout + Tailwind classes (opacity + scale + translate)"
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 2. Đoạn code AI sinh ra + tôi đã sửa gì
 
-## Learn More
+#### Code AI đưa ra (Stats component):
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```javascript
+const completionRate = total > 0 ? (completed / total) \* 100 : 0;
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<div className="progress-bar" style={{ width: `${completionRate}%` }} />
+```
 
-### Code Splitting
+#### Tôi đã sửa thành:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```javascript
+const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
 
-### Analyzing the Bundle Size
+<div className="progress-bar-bg">
+  <div className="progress-bar-fill" style={{ width: `${completionRate}%` }} />
+</div>;
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Lý do sửa:
 
-### Making a Progressive Web App
+- AI dùng chia trực tiếp mà không làm tròn → tôi thêm Math.round để hiển thị % đẹp hơn (ví dụ 66% thay vì 66.666)
+- Thêm div wrapper cho background để progress bar nhìn chuyên nghiệp hơn (Tailwind classes cho bg và fill)
+- Thêm kiểm tra total > 0 để hiển thị conditional progress bar, tránh hiển thị khi không có todo
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 3. Lỗi nghiêm trọng của AI mà tôi đã phát hiện & sửa
 
-### Advanced Configuration
+#### Lỗi AI mắc phải:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+AI quên xử lý animation khi delete, dẫn đến item biến mất đột ngột. Code AI đưa chỉ delete ngay lập tức mà không có transition.
 
-### Deployment
+Code lỗi AI đưa ra:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```javascript
+const deleteTodo = (id) => {
+  setTodos(todos.filter((todo) => todo.id !== id));
+};
+```
 
-### `npm run build` fails to minify
+Tôi đã fix thành:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```javascript
+onst [isDeleting, setIsDeleting] = useState(false);
+
+const handleDelete = () => {
+  setIsDeleting(true);
+  setTimeout(() => {
+    deleteTodo(todo.id);
+  }, 300);
+};
+
+<li className={`todo-item ${isDeleting ? "opacity-0 scale-95 animate-slideOutRight" : "opacity-100 scale-100 animate-fadeInUp"}`}>
+```
+
+Hậu quả nếu không sửa: UX kém, item biến mất đột ngột → tôi thêm state isDeleting và setTimeout để trigger animation trước khi xóa thật sự.
+
+Ngoài ra tôi còn thêm:
+
+- Validation cho input thêm todo (không cho rỗng, thêm class error)
+- Emoji cho filter buttons và theme toggle để UI sinh động hơn
+
+### Công nghệ sử dụng
+
+- Create React App + React 18
+- Tailwind CSS cho styling
+- localStorage cho persist data và theme
+- Custom CSS cho animations và themes
+
+### 🚀 Hướng dẫn chạy dự án
+
+```bash
+# 1. Vào thư mục dự án
+cd todo_mig_app
+
+# 2. Cài đặt dependencies
+npm install
+
+# 3. Chạy development server
+npm start
+
+### Mở http://localhost:3000 để xem ứng dụng.
+### Các lệnh khác:
+
+npm run build   # Build production
+npm test        # Chạy test
+```
+
+### 📁 Cấu trúc dự án
+
+```text
+todo_mig_app/
+├── public/
+├── src/
+│   ├── components/
+│   ├── App.js
+│   ├── App.css
+│   ├── index.css
+│   └── index.js
+├── package.json
+└── README.md
+```
