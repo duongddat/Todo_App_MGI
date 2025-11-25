@@ -1,5 +1,6 @@
 .todo-app {
-  @apply min-h-screen flex flex-col items-center pt-8 text-[15px];
+  @apply min-h-screen flex flex-col items-center text-[14px] justify-center;
+  padding: 1rem 0.75rem;
   background: linear-gradient(
     to bottom right,
     var(--background),
@@ -9,23 +10,31 @@
 }
 
 .todo-wrapper {
-  @apply w-full max-w-2xl;
+  @apply w-full;
+  max-width: 100%;
 }
 
 .todo-card {
-  @apply card hover:shadow-2xl;
+  @apply rounded-2xl shadow-xl backdrop-blur-lg transition-all duration-300;
+  padding: 1.25rem;
+  background: var(--card-bg);
+  color: var(--text-primary);
 }
 
 .todo-header {
-  @apply flex justify-between items-center mb-8;
+  @apply flex justify-between items-center;
+  margin-bottom: 1.5rem;
 }
 
 .todo-header-left {
-  @apply flex items-center gap-3;
+  @apply flex items-center;
+  gap: 0.5rem;
 }
 
 .todo-logo {
-  @apply w-12 h-12 rounded-xl flex items-center justify-center shadow-lg;
+  @apply rounded-lg flex items-center justify-center shadow-md;
+  width: 2.5rem;
+  height: 2.5rem;
   background: linear-gradient(
     to bottom right,
     var(--button-primary),
@@ -34,10 +43,67 @@
 }
 
 .todo-title {
-  @apply text-4xl font-black bg-clip-text text-transparent;
+  @apply font-black bg-clip-text text-transparent;
+  font-size: 1.75rem;
   background-image: linear-gradient(
     to right,
     var(--button-primary),
     var(--button-secondary)
   );
+}
+
+@media (min-width: 768px) {
+  .todo-wrapper {
+    padding: 0 0.5rem;
+  }
+
+  .todo-app {
+    @apply pt-8 text-[15px];
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .todo-card {
+    @apply rounded-3xl shadow-2xl;
+    padding: 2rem;
+  }
+
+  .todo-card:hover {
+    @apply shadow-2xl;
+    transform: translateY(-2px);
+  }
+
+  .todo-header {
+    margin-bottom: 2rem;
+  }
+
+  .todo-header-left {
+    gap: 0.75rem;
+  }
+
+  .todo-logo {
+    @apply rounded-xl shadow-lg;
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .todo-title {
+    font-size: 2.25rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .todo-wrapper {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .todo-wrapper {
+    max-width: 768px;
+  }
+
+  .todo-title {
+    font-size: 2.5rem;
+  }
 }

@@ -8,23 +8,23 @@ const Stats = ({ todos }) => {
 
   return (
     <div className="stats-container">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
         {/* Total */}
         <div className="text-center">
           <div className="stat-number stat-number-total">{total}</div>
-          <div className="stat-label">Tổng số</div>
+          <div className="stat-label">Tổng</div>
         </div>
 
         {/* Completed */}
         <div className="text-center">
           <div className="stat-number stat-number-completed">{completed}</div>
-          <div className="stat-label">Đã xong</div>
+          <div className="stat-label">Xong</div>
         </div>
 
         {/* Pending */}
         <div className="text-center">
           <div className="stat-number stat-number-pending">{pending}</div>
-          <div className="stat-label">Chưa xong</div>
+          <div className="stat-label">Chưa</div>
         </div>
 
         {/* Completion Rate */}
@@ -36,7 +36,7 @@ const Stats = ({ todos }) => {
 
       {/* Progress Bar */}
       {total > 0 && (
-        <div className="mt-4">
+        <div className="mt-3 sm:mt-4">
           <div className="progress-bar-bg">
             <div
               className="progress-bar-fill"

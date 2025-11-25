@@ -12,13 +12,13 @@ const TodoItem = ({ todo, toggleComplete, deleteTodo }) => {
 
   return (
     <li
-      className={`todo-item ${
+      className={`todo-item group ${
         isDeleting
           ? "opacity-0 scale-95 animate-slideOutRight"
           : "opacity-100 scale-100 animate-fadeInUp"
       } ${todo.completed ? "opacity-70" : ""}`}
     >
-      {/* Custom Checkbox */}
+      {/*  Checkbox */}
       <div className="relative flex-shrink-0">
         <input
           type="checkbox"
@@ -31,11 +31,11 @@ const TodoItem = ({ todo, toggleComplete, deleteTodo }) => {
           htmlFor={`todo-${todo.id}`}
           className={`todo-checkbox ${
             todo.completed ? "todo-checkbox-checked" : ""
-          } hover:border-purple-500 dark:hover:border-purple-400`}
+          } hover:border-purple-500`}
         >
           {todo.completed && (
             <svg
-              className="w-4 h-4 text-white"
+              className="w-3 h-3 sm:w-4 sm:h-4 text-white"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -54,10 +54,8 @@ const TodoItem = ({ todo, toggleComplete, deleteTodo }) => {
       {/* Todo Text */}
       <span
         className={`todo-text ${
-          todo.completed
-            ? "todo-text-completed"
-            : "group-hover:text-purple-600 dark:group-hover:text-purple-400"
-        }`}
+          todo.completed ? "todo-text-completed" : ""
+        } group-hover:text-purple-600 dark:group-hover:text-purple-400`}
         onClick={() => toggleComplete(todo.id)}
       >
         {todo.title}
@@ -66,11 +64,12 @@ const TodoItem = ({ todo, toggleComplete, deleteTodo }) => {
       {/* Delete Button */}
       <button
         onClick={handleDelete}
-        className="btn-delete opacity-0 group-hover:opacity-100 focus:opacity-100 focus:ring-red-300"
+        className="btn-delete flex-shrink-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 
+                   sm:focus:opacity-100 transition-opacity"
         aria-label="Xóa"
       >
         <svg
-          className="w-5 h-5"
+          className="w-4 h-4 sm:w-5 sm:h-5"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

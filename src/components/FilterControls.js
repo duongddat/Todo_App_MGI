@@ -2,12 +2,12 @@ import React from "react";
 
 const FilterControls = ({ filter, setFilter, searchTerm, setSearchTerm }) => {
   return (
-    <div className="mb-6 space-y-4">
+    <div className="space-y-3 mb-5 sm:mb-6">
       {/* Search Box */}
       <div className="relative">
-        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+        <div className="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
           <svg
-            className="w-5 h-5"
+            className="w-4 h-4 sm:w-5 sm:h-5"
             style={{ color: "var(--text-tertiary)" }}
             fill="none"
             stroke="currentColor"
@@ -23,7 +23,7 @@ const FilterControls = ({ filter, setFilter, searchTerm, setSearchTerm }) => {
         </div>
         <input
           type="text"
-          placeholder="Tìm kiếm công việc..."
+          placeholder="Tìm kiếm..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="input-search focus:ring-purple-100 dark:focus:ring-purple-900 placeholder-gray-400"
@@ -32,7 +32,7 @@ const FilterControls = ({ filter, setFilter, searchTerm, setSearchTerm }) => {
 
       {/* Filter Buttons */}
       <div
-        className="flex gap-2 p-1.5 rounded-2xl"
+        className="flex gap-1.5 sm:gap-2 p-1 sm:p-1.5 rounded-xl sm:rounded-2xl"
         style={{ background: "var(--filter-bg)" }}
       >
         <button
@@ -41,9 +41,9 @@ const FilterControls = ({ filter, setFilter, searchTerm, setSearchTerm }) => {
             filter === "all" ? "filter-btn-active-all" : ""
           }`}
         >
-          <span className="flex items-center justify-center gap-2">
-            <span>📋</span>
-            <span>Tất cả</span>
+          <span className="flex items-center justify-center gap-1 sm:gap-2">
+            <span className="text-sm sm:text-base">📋</span>
+            <span className="inline max-sm:text-[10px]">Tất cả</span>
           </span>
         </button>
         <button
@@ -52,9 +52,9 @@ const FilterControls = ({ filter, setFilter, searchTerm, setSearchTerm }) => {
             filter === "active" ? "filter-btn-active" : ""
           }`}
         >
-          <span className="flex items-center justify-center gap-2">
-            <span>⏳</span>
-            <span>Đang làm</span>
+          <span className="flex items-center justify-center gap-1 sm:gap-2">
+            <span className="text-sm sm:text-base">⏳</span>
+            <span className="inline max-sm:text-[10px]">Đang làm</span>
           </span>
         </button>
         <button
@@ -63,9 +63,9 @@ const FilterControls = ({ filter, setFilter, searchTerm, setSearchTerm }) => {
             filter === "completed" ? "filter-btn-active-completed" : ""
           }`}
         >
-          <span className="flex items-center justify-center gap-2">
-            <span>✅</span>
-            <span>Hoàn thành</span>
+          <span className="flex items-center justify-center gap-1 sm:gap-2">
+            <span className="text-sm sm:text-base">✅</span>
+            <span className="inline max-sm:text-[9px]">Hoàn thành</span>
           </span>
         </button>
       </div>
