@@ -2,13 +2,26 @@ import React, { useState } from "react";
 
 const TodoForm = ({ addTodo }) => {
   const [inputValue, setInputValue] = useState("");
+  const [validate, setValidate] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (inputValue.trim()) {
-      addTodo(inputValue);
-      setInputValue("");
+    const value = inputValue.trim();
+    const isEmpty = value === "";
+
+    if (isEmpty) {
+      setValidate(true);
+      return;
     }
+
+    addTodo(inputValue);
+    setInputValue("");
+    setValidate(false);
+  };
+
+  const handleInput = (e) => {
+    setInputValue(e.target.value);
+    if (validate) setValidate(false);
   };
 
   return (
@@ -18,15 +31,14 @@ const TodoForm = ({ addTodo }) => {
           <input
             type="text"
             value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            onChange={(e) => handleInput(e)}
             placeholder="Thêm công việc mới..."
-            className="w-full px-5 py-4 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-gray-700 dark:to-gray-600 border-2 border-purple-200 dark:border-gray-500 rounded-2xl text-gray-700 dark:text-gray-200 placeholder-gray-400 focus:outline-none focus:border-purple-500 dark:focus:border-purple-400 focus:ring-4 focus:ring-purple-100 dark:focus:ring-purple-900 transition-all duration-200"
+            className={`w-full px-5 py-4 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-gray-700 dark:to-gray-600 border-2 border-purple-200 dark:border-gray-500 rounded-2xl text-gray-700 dark:text-gray-200 placeholder-gray-400 focus:outline-none focus:border-purple-500 dark:focus:border-purple-400 focus:ring-4 focus:ring-purple-100 dark:focus:ring-purple-900 transition-all duration-200 ${
+              validate ? "input-error" : ""
+            }`}
           />
         </div>
-        <button
-          type="submit"
-          className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-2xl shadow-lg shadow-purple-500/50 hover:shadow-purple-500/70 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-purple-300"
-        >
+        <button type="submit" className="btn-primary focus:ring-purple-300">
           <span className="flex items-center gap-2">
             <svg
               className="w-5 h-5"

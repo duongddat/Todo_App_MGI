@@ -3,25 +3,103 @@
 @tailwind utilities;
 
 :root {
+  /* Background Colors */
   --background: #faf5ff;
-  --text-primary: #1f2937;
+  --background-secondary: #f3e8ff;
   --card-bg: #ffffff;
-  --button-bg: #8b5cf6;
+
+  /* Text Colors */
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-tertiary: #9ca3af;
+
+  /* Button Colors */
+  --button-primary: #8b5cf6;
+  --button-primary-hover: #7c3aed;
+  --button-secondary: #ec4899;
   --button-text: #ffffff;
-  --input-bg: #ffffff;
-  --input-border: #e5e7eb;
-  --delete-bg: #ef4444;
+
+  /* Input Colors */
+  --input-bg: #faf5ff;
+  --input-border: #e9d5ff;
+  --input-border-focus: #8b5cf6;
+  --input-text: #1f2937;
+
+  /* State Colors */
+  --success: #10b981;
+  --success-light: #d1fae5;
+  --error: #ef4444;
+  --error-light: #fee2e2;
+  --warning: #f59e0b;
+  --info: #3b82f6;
+
+  /* Border & Shadow */
+  --border-color: #e5e7eb;
+  --shadow-color: rgba(139, 92, 246, 0.2);
+
+  /* Filter Button Colors */
+  --filter-bg: #f3f4f6;
+  --filter-text: #4b5563;
+  --filter-hover: #ffffff;
+
+  /* Stats Colors */
+  --stats-bg-from: #faf5ff;
+  --stats-bg-via: #fce7f3;
+  --stats-bg-to: #dbeafe;
+  --stats-total: #8b5cf6;
+  --stats-completed: #10b981;
+  --stats-pending: #3b82f6;
+  --stats-rate: #ec4899;
 }
 
 .dark {
+  /* Background Colors */
   --background: #111827;
-  --text-primary: #f9fafb;
+  --background-secondary: #1f2937;
   --card-bg: #1f2937;
-  --button-bg: #a78bfa;
-  --button-text: #111827;
+
+  /* Text Colors */
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-tertiary: #9ca3af;
+
+  /* Button Colors */
+  --button-primary: #a78bfa;
+  --button-primary-hover: #8b5cf6;
+  --button-secondary: #f472b6;
+  --button-text: #ffffff;
+
+  /* Input Colors */
   --input-bg: #374151;
   --input-border: #4b5563;
-  --delete-bg: #dc2626;
+  --input-border-focus: #a78bfa;
+  --input-text: #f9fafb;
+
+  /* State Colors */
+  --success: #34d399;
+  --success-light: #064e3b;
+  --error: #f87171;
+  --error-light: #7f1d1d;
+  --warning: #fbbf24;
+  --info: #60a5fa;
+
+  /* Border & Shadow */
+  --border-color: #374151;
+  --shadow-color: rgba(167, 139, 250, 0.2);
+
+  /* Filter Button Colors */
+  --filter-bg: #374151;
+  --filter-text: #d1d5db;
+  --filter-hover: #4b5563;
+
+  /* Stats Colors */
+  --stats-bg-from: #374151;
+  --stats-bg-via: #581c87;
+  --stats-bg-to: #312e81;
+  --stats-total: #c4b5fd;
+  --stats-completed: #6ee7b7;
+  --stats-pending: #93c5fd;
+  --stats-rate: #f9a8d4;
 }
 
 * {
@@ -43,6 +121,171 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+@layer components {
+  .card {
+    @apply rounded-3xl shadow-2xl p-8 backdrop-blur-lg transition-all duration-300;
+    background: var(--card-bg);
+    color: var(--text-primary);
+  }
+
+  .btn-primary {
+    @apply px-8 py-4 font-bold rounded-2xl shadow-lg transition-all duration-200 
+           hover:scale-105 active:scale-95 focus:outline-none focus:ring-4;
+    background: linear-gradient(
+      to right,
+      var(--button-primary),
+      var(--button-secondary)
+    );
+    color: var(--button-text);
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 font-semibold rounded-xl transition-all duration-200;
+    background: var(--filter-bg);
+    color: var(--filter-text);
+  }
+
+  .btn-secondary:hover {
+    background: var(--filter-hover);
+  }
+
+  .btn-delete {
+    @apply p-2 rounded-xl transition-all duration-200 hover:scale-110 
+           active:scale-95 focus:outline-none focus:ring-2;
+    background: linear-gradient(
+      to right,
+      var(--error),
+      var(--button-secondary)
+    );
+    color: var(--button-text);
+  }
+
+  .input {
+    @apply w-full px-5 py-4 rounded-2xl border-2 transition-all duration-200
+           focus:outline-none focus:ring-4;
+    background: var(--input-bg);
+    border-color: var(--input-border);
+    color: var(--input-text);
+  }
+
+  .input:focus {
+    border-color: var(--input-border-focus);
+  }
+
+  .input-search {
+    @apply w-full pl-12 pr-4 py-3 rounded-2xl border-2 transition-all duration-200
+           focus:outline-none focus:ring-4;
+    background: var(--input-bg);
+    border-color: var(--input-border);
+    color: var(--input-text);
+  }
+
+  .filter-btn {
+    @apply flex-1 px-4 py-2.5 rounded-xl font-semibold transition-all duration-200;
+    color: var(--filter-text);
+  }
+
+  .filter-btn:hover {
+    filter: brightness(1.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .filter-btn-active-all {
+    @apply bg-gradient-to-r from-purple-500 to-pink-500 text-white 
+           shadow-lg shadow-purple-500/50 scale-105;
+  }
+
+  .filter-btn-active {
+    @apply bg-gradient-to-r from-blue-500 to-cyan-500 text-white 
+           shadow-lg shadow-blue-500/50 scale-105;
+  }
+
+  .filter-btn-active-completed {
+    @apply bg-gradient-to-r from-green-500 to-emerald-500 text-white 
+           shadow-lg shadow-green-500/50 scale-105;
+  }
+
+  .todo-item {
+    @apply flex items-center gap-2 p-4 rounded-2xl shadow-md 
+           hover:shadow-lg transition-all duration-300 hover:scale-[1.02];
+    background: linear-gradient(
+      to right,
+      var(--card-bg),
+      var(--background-secondary)
+    );
+  }
+
+  .todo-checkbox {
+    @apply flex items-center justify-center w-6 h-6 border-2 rounded-lg 
+           cursor-pointer transition-all duration-200;
+    border-color: var(--border-color);
+  }
+
+  .todo-checkbox-checked {
+    @apply bg-gradient-to-r from-green-500 to-emerald-500 border-transparent;
+  }
+
+  .todo-text {
+    @apply flex-1 text-lg cursor-pointer transition-all duration-200;
+    color: var(--text-primary);
+  }
+
+  .todo-text-completed {
+    @apply line-through;
+    color: var(--text-tertiary);
+  }
+
+  .stats-container {
+    @apply mt-6 p-6 rounded-2xl;
+    background: linear-gradient(
+      to right,
+      var(--stats-bg-from),
+      var(--stats-bg-via),
+      var(--stats-bg-to)
+    );
+  }
+
+  .stat-number {
+    @apply text-3xl font-bold;
+  }
+
+  .stat-label {
+    @apply text-sm mt-1 font-medium;
+    color: var(--text-secondary);
+  }
+
+  .stat-number-total {
+    color: var(--stats-total);
+  }
+
+  .stat-number-completed {
+    color: var(--stats-completed);
+  }
+
+  .stat-number-pending {
+    color: var(--stats-pending);
+  }
+
+  .stat-number-rate {
+    color: var(--stats-rate);
+  }
+
+  .progress-bar-bg {
+    @apply w-full rounded-full h-3 overflow-hidden;
+    background: var(--filter-bg);
+  }
+
+  .progress-bar-fill {
+    @apply h-full bg-gradient-to-r from-green-500 to-emerald-500 
+           transition-all duration-500 ease-out rounded-full;
+  }
+}
+
+.input-error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
 }
 
 /* Custom Animations */
